@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Kakuro" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Цвета приложения -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Настройка кнопок, текста и т.д. -->
+        <item name="android:buttonStyle">@style/Widget.App.Button.NumberPad</item>
+    </style>
+
+    <style name="Theme.Kakuro" parent="Base.Theme.Kakuro" />
+</resources>

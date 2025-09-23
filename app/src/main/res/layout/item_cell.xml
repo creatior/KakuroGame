@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/selected_cell_border"
+    android:padding="4dp">
+
+
+    <!-- Место для основной цифры (центр) -->
+    <TextView
+        android:id="@+id/tvCellNumber"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/textPrimary"
+        android:textStyle="bold"/>
+
+
+    <!-- Маленькая подсказка (например, сумма) в правом верхнем углу -->
+    <TextView
+        android:id="@+id/tvCellHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:textSize="10sp"
+        android:textColor="@color/hint"
+        android:visibility="gone"/>
+
+
+</FrameLayout>
