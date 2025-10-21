@@ -6,6 +6,7 @@
     <color name="primary">#F5F5F7</color>
     <color name="primaryDark">#F5F5F7</color>
     <color name="textPrimary">#111111</color>
+    <color name="textSecondary">#666666</color>
     <color name="hint">#888888</color>
     <color name="border">#DDDDDD</color>
     <color name="selected">#3B82F6</color>

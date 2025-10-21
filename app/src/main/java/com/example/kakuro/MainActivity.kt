@@ -1,21 +1,25 @@
 package com.example.kakuro
 
 import Cell
+import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.gridlayout.widget.GridLayout
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private var selectedCell: TextView? = null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
     private val kakuroField: Array<Array<Cell>> = arrayOf(
         arrayOf(Cell(CellType.BLACK), Cell(CellType.BLACK, clueDown = 16), Cell(CellType.BLACK, clueDown = 24), Cell(CellType.BLACK, clueDown = 17), Cell(CellType.BLACK)),
@@ -35,10 +39,44 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navigationView = findViewById(R.id.navigationView)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        toggle.drawerArrowDrawable.color = getColor(android.R.color.black)
+
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_new_game -> {
+                    drawerLayout.closeDrawers()
+                    showNewGameDialog()
+                    true
+                }
+                R.id.nav_how_to_play -> {
+                    drawerLayout.closeDrawers()
+                    startActivity(Intent(this, HowToPlayActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
         val gridLayout = findViewById<GridLayout>(R.id.gameGrid)
         generateKakuroGrid(gridLayout, kakuroField)
+        setupNumberPad()
+    }
 
-        // Подключаем numberPad
+
+    private fun setupNumberPad() {
         val numberButtons = listOf(
             findViewById<FrameLayout>(R.id.btn1),
             findViewById<FrameLayout>(R.id.btn2),
@@ -56,6 +94,33 @@ class MainActivity : AppCompatActivity() {
                 selectedCell?.text = (index + 1).toString()
             }
         }
+    }
+
+    private fun showNewGameDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_new_game, null)
+        val spinner = dialogView.findViewById<Spinner>(R.id.spinnerSize)
+
+        val sizes = (10..20).map { "${it}x${it}" }
+        spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sizes)
+
+        AlertDialog.Builder(this)
+            .setTitle("Новая игра")
+            .setView(dialogView)
+            .setPositiveButton("Начать") { dialog, _ ->
+                val selectedSize = spinner.selectedItem.toString()
+                val selectedDifficulty = when (dialogView.findViewById<RadioGroup>(R.id.rgDifficulty).checkedRadioButtonId) {
+                    R.id.rbEasy -> "Легкий"
+                    R.id.rbMedium -> "Средний"
+                    R.id.rbHard -> "Сложный"
+                    R.id.rbVeryHard -> "Очень сложный"
+                    else -> "Не выбрано"
+                }
+
+                Toast.makeText(this, "Выбрано: $selectedDifficulty, $selectedSize", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Отмена", null)
+            .show()
     }
 
     private fun generateKakuroGrid(gridLayout: GridLayout, field: Array<Array<Cell>>) {
@@ -111,9 +176,7 @@ class MainActivity : AppCompatActivity() {
                         addView(text)
 
                         setOnClickListener {
-                            // снимаем выделение с предыдущей клетки
                             selectedCell?.background = null
-                            // выделяем текущую
                             text.setBackgroundResource(R.drawable.selected_cell_border)
                             selectedCell = text
                         }
@@ -124,5 +187,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
