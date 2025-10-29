@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kakuro">
         <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_leaderboard"
+            android:theme="@style/Theme.Kakuro" />
+        <activity
             android:name=".HowToPlayActivity"
             android:exported="false" />
         <activity

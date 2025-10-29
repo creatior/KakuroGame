@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, HowToPlayActivity::class.java))
                     true
                 }
+                R.id.nav_leaderboard -> {
+                    drawerLayout.closeDrawers()
+                    startActivity(Intent(this, LeaderboardActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }

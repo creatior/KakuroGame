@@ -8,4 +8,8 @@
         android:id="@+id/nav_how_to_play"
         android:title="Как играть"
         android:icon="@drawable/ic_how_to_play"/>
+    <item
+        android:id="@+id/nav_leaderboard"
+        android:title="Список лидеров"
+        />
 </menu>
