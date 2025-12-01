@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var kakuroField: Array<Array<Cell>>
 
+    private lateinit var tvTimer: TextView
+    private var secondsElapsed = 0
+    private var timerRunning = false
+    private val handler = android.os.Handler()
+    private lateinit var timerRunnable: Runnable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        tvTimer = findViewById(R.id.tvTimer)
+        tvTimer.text = "00:00"
+        tvTimer.visibility = View.GONE
 
         val startButton = findViewById<Button>(R.id.btnStartGame)
         val gridLayout = findViewById<GridLayout>(R.id.gameGrid)
@@ -131,6 +141,8 @@ class MainActivity : AppCompatActivity() {
                 kakuroField = LevelLoader.loadLevel(this, selectedDifficulty, selectedSize)
                 generateKakuroGrid(gridLayout, kakuroField)
                 setupNumberPad()
+                tvTimer.visibility = View.VISIBLE
+                startTimer()
                 dialog.dismiss()
             }
             .setNegativeButton("Отмена", null)
@@ -202,4 +214,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun startTimer() {
+        secondsElapsed = 0
+        timerRunning = true
+        timerRunnable = object : Runnable {
+            override fun run() {
+                if (timerRunning) {
+                    secondsElapsed++
+                    val minutes = secondsElapsed / 60
+                    val seconds = secondsElapsed % 60
+                    tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+                    handler.postDelayed(this, 1000)
+                }
+            }
+        }
+        handler.post(timerRunnable)
+    }
+
+    private fun stopTimer() {
+        timerRunning = false
+        handler.removeCallbacks(timerRunnable)
+    }
 }

@@ -12,18 +12,35 @@
         android:layout_height="match_parent"
         android:background="@color/primary">
 
-        <!-- Toolbar с бургером -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+
+        <FrameLayout
+            android:id="@+id/toolbarContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="Kakuro"
-            app:titleTextColor="@android:color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:title="Kakuro"
+                app:titleTextColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp" />
+
+        </FrameLayout>
 
         <!-- Игровое поле -->
 
@@ -37,7 +54,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/numberPad"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbarContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +67,7 @@
             app:columnCount="5"
             app:rowCount="5"
             app:useDefaultMargins="true"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbarContainer"
             app:layout_constraintBottom_toTopOf="@id/numberPad"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
