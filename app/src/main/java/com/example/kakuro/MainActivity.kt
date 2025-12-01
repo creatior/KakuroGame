@@ -128,8 +128,8 @@ class MainActivity : AppCompatActivity() {
                 startButton.visibility = View.GONE
                 gridLayout.visibility = View.VISIBLE
 
-                val grid = LevelLoader.loadLevel(this, selectedDifficulty, selectedSize)
-                generateKakuroGrid(gridLayout, grid)
+                kakuroField = LevelLoader.loadLevel(this, selectedDifficulty, selectedSize)
+                generateKakuroGrid(gridLayout, kakuroField)
                 setupNumberPad()
                 dialog.dismiss()
             }
