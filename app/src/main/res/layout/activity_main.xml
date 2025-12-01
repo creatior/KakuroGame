@@ -26,8 +26,24 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Игровое поле -->
+
+        <Button
+            android:id="@+id/btnStartGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:text="Начать новую игру"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/numberPad"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gameGrid"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:alignmentMode="alignMargins"
@@ -43,193 +59,195 @@
         <!-- Панель цифр -->
         <LinearLayout
             android:id="@+id/numberPad"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="12dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <FrameLayout
-        android:id="@+id/btn1"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn1_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="1"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn1_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn2"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn2"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn2_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="2"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn2_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn3"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn3_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="3"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn3_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn4"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn4"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn4_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="4"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn4_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn5"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn5"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn5_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="5"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn5_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn6"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn6"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn6_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="6"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn6_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn7"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn7"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn7_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="7"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn7_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn8"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn8"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn8_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="8"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn8_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/btn9"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:layout_margin="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/number_button_selector">
+            <FrameLayout
+                android:id="@+id/btn9"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/number_button_selector"
+                android:clickable="true"
+                android:focusable="true">
 
-        <TextView
-            android:id="@+id/btn9_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="9"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:gravity="center"/>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/btn9_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="9"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
+            </FrameLayout>
         </LinearLayout>
 
 

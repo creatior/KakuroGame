@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -20,14 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var selectedCell: TextView? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
-
-    private val kakuroField: Array<Array<Cell>> = arrayOf(
-        arrayOf(Cell(CellType.BLACK), Cell(CellType.BLACK, clueDown = 16), Cell(CellType.BLACK, clueDown = 24), Cell(CellType.BLACK, clueDown = 17), Cell(CellType.BLACK)),
-        arrayOf(Cell(CellType.BLACK, clueRight = 23), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE)),
-        arrayOf(Cell(CellType.BLACK, clueRight = 30), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE)),
-        arrayOf(Cell(CellType.BLACK, clueRight = 27), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE), Cell(CellType.WHITE)),
-        arrayOf(Cell(CellType.BLACK), Cell(CellType.BLACK, clueRight = 12), Cell(CellType.BLACK, clueDown = 10), Cell(CellType.BLACK, clueRight = 7), Cell(CellType.BLACK))
-    )
+    private lateinit var kakuroField: Array<Array<Cell>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +69,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val startButton = findViewById<Button>(R.id.btnStartGame)
         val gridLayout = findViewById<GridLayout>(R.id.gameGrid)
-        generateKakuroGrid(gridLayout, kakuroField)
-        setupNumberPad()
+
+        startButton.setOnClickListener {
+            showNewGameDialog()
+        }
     }
 
 
     private fun setupNumberPad() {
+        val numberPad = findViewById<LinearLayout>(R.id.numberPad)
+        numberPad.visibility = View.VISIBLE
+
         val numberButtons = listOf(
             findViewById<FrameLayout>(R.id.btn1),
             findViewById<FrameLayout>(R.id.btn2),
@@ -105,23 +105,32 @@ class MainActivity : AppCompatActivity() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_new_game, null)
         val spinner = dialogView.findViewById<Spinner>(R.id.spinnerSize)
 
-        val sizes = (10..20).map { "${it}x${it}" }
+        val sizes = (10..20 step 5).map { "${it}x${it}" }
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sizes)
 
         AlertDialog.Builder(this)
             .setTitle("Новая игра")
             .setView(dialogView)
             .setPositiveButton("Начать") { dialog, _ ->
-                val selectedSize = spinner.selectedItem.toString()
+                val selectedSize = spinner.selectedItem.toString().substringBefore("x").toInt()
+
                 val selectedDifficulty = when (dialogView.findViewById<RadioGroup>(R.id.rgDifficulty).checkedRadioButtonId) {
-                    R.id.rbEasy -> "Легкий"
-                    R.id.rbMedium -> "Средний"
-                    R.id.rbHard -> "Сложный"
-                    R.id.rbVeryHard -> "Очень сложный"
-                    else -> "Не выбрано"
+                    R.id.rbEasy -> Difficulty.EASY
+                    R.id.rbMedium -> Difficulty.MEDIUM
+                    R.id.rbHard -> Difficulty.HARD
+                    R.id.rbVeryHard -> Difficulty.VERY_HARD
+                    else -> Difficulty.EASY
                 }
 
-                Toast.makeText(this, "Выбрано: $selectedDifficulty, $selectedSize", Toast.LENGTH_SHORT).show()
+                val gridLayout = findViewById<GridLayout>(R.id.gameGrid)
+                val startButton = findViewById<Button>(R.id.btnStartGame)
+
+                startButton.visibility = View.GONE
+                gridLayout.visibility = View.VISIBLE
+
+                val grid = LevelLoader.loadLevel(this, selectedDifficulty, selectedSize)
+                generateKakuroGrid(gridLayout, grid)
+                setupNumberPad()
                 dialog.dismiss()
             }
             .setNegativeButton("Отмена", null)
@@ -152,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                     isClickable = cell.type == CellType.WHITE
                     isFocusable = cell.type == CellType.WHITE
 
-                    if (cell.type == CellType.BLACK && (cell.clueRight != null || cell.clueDown != null)) {
+                    if (cell.type == CellType.BLACK && (cell.right != null || cell.down != null)) {
                         val text = TextView(context).apply {
                             layoutParams = FrameLayout.LayoutParams(
                                 FrameLayout.LayoutParams.MATCH_PARENT,
@@ -162,9 +171,9 @@ class MainActivity : AppCompatActivity() {
                             textSize = 12f
                             gravity = android.view.Gravity.TOP or android.view.Gravity.END
                             text = buildString {
-                                cell.clueDown?.let { append("↓$it") }
-                                if (cell.clueDown != null && cell.clueRight != null) append("\n")
-                                cell.clueRight?.let { append("→$it") }
+                                cell.down?.let { append("↓$it") }
+                                if (cell.down != null && cell.right != null) append("\n")
+                                cell.right?.let { append("→$it") }
                             }
                         }
                         addView(text)
@@ -192,4 +201,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }

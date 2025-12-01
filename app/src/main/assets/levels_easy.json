@@ -1,0 +1,127 @@
+[
+    {
+        "size": 10,
+        "grid": [
+            [
+                {"type": "BLACK"},
+                {"type": "BLACK", "down": 16},
+                {"type": "BLACK", "down": 24},
+                {"type": "BLACK"},
+                {"type": "BLACK", "right": 17},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK", "right": 23},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "right": 6},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK", "right": 30},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "down": 7},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "right": 12},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "right": 4},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK", "down": 15},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "down": 13},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK", "right": 16},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"}
+            ],
+            [
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "right": 6},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK", "right": 17},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "down": 7},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK", "down": 8},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "WHITE"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ],
+            [
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"},
+                {"type": "BLACK"}
+            ]
+        ]
+    }
+]
