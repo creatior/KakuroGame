@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -24,10 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var kakuroField: Array<Array<Cell>>
 
     private lateinit var tvTimer: TextView
-    private var secondsElapsed = 0
-    private var timerRunning = false
     private val handler = android.os.Handler()
     private lateinit var timerRunnable: Runnable
+    private var startTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -215,24 +215,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimer() {
-        secondsElapsed = 0
-        timerRunning = true
+        startTime = SystemClock.elapsedRealtime()
+        tvTimer.visibility = View.VISIBLE
+
         timerRunnable = object : Runnable {
             override fun run() {
-                if (timerRunning) {
-                    secondsElapsed++
-                    val minutes = secondsElapsed / 60
-                    val seconds = secondsElapsed % 60
-                    tvTimer.text = String.format("%02d:%02d", minutes, seconds)
-                    handler.postDelayed(this, 1000)
-                }
+                val elapsedMillis = SystemClock.elapsedRealtime() - startTime
+                val totalSeconds = (elapsedMillis / 1000).toInt()
+                val minutes = totalSeconds / 60
+                val seconds = totalSeconds % 60
+                tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+                handler.postDelayed(this, 200) // 200ms для плавности, не обязательно 1000
             }
         }
         handler.post(timerRunnable)
     }
 
+
     private fun stopTimer() {
-        timerRunning = false
         handler.removeCallbacks(timerRunnable)
     }
 }
