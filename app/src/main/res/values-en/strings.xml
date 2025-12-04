@@ -1,0 +1,25 @@
+<resources>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+    <string name="title_activity_leaderboard">LeaderboardActivity</string>
+    <string name="new_game">New game</string>
+    <string name="start_game_button">Start</string>
+    <string name="cancel_new_game">Cancel</string>
+    <string name="win_message">Congratulations!</string>
+    <string name="win_time">You solved the puzzle in %1$d minutes %2$d seconds.</string>
+    <string name="ok_label">OK</string>
+    <string name="login_label">Login</string>
+    <string name="login_button">Log In</string>
+    <string name="choose_difficulty">Choose difficulty</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="difficulty_very_hard">Very hard</string>
+    <string name="field_size">Field size</string>
+    <string name="nav_new_game">New game</string>
+    <string name="nav_how_to_play">How to play</string>
+    <string name="nav_leaderboard">Leaderboard</string>
+    <string name="toast_login">Enter username</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="return_label">Return</string>
+</resources>

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_new_game"
-        android:title="Новая игра"
+        android:title="@string/nav_new_game"
         android:icon="@drawable/ic_new_game"/>
     <item
         android:id="@+id/nav_how_to_play"
-        android:title="Как играть"
+        android:title="@string/nav_how_to_play"
         android:icon="@drawable/ic_how_to_play"/>
     <item
         android:id="@+id/nav_leaderboard"
-        android:title="Список лидеров"
+        android:title="@string/nav_leaderboard"
         />
 </menu>

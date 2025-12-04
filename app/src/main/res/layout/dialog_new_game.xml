@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:text="Выберите сложность"
+        android:text="@string/choose_difficulty"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginBottom="8dp"
@@ -18,22 +18,22 @@
         android:id="@+id/rgDifficulty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RadioButton android:id="@+id/rbEasy" android:text="Легкий"
+        <RadioButton android:id="@+id/rbEasy" android:text="@string/difficulty_easy"
             android:layout_width="200dp"
             android:layout_height="30dp"/>
-        <RadioButton android:id="@+id/rbMedium" android:text="Средний"
+        <RadioButton android:id="@+id/rbMedium" android:text="@string/difficulty_medium"
             android:layout_width="200dp"
             android:layout_height="30dp"/>
-        <RadioButton android:id="@+id/rbHard" android:text="Сложный"
+        <RadioButton android:id="@+id/rbHard" android:text="@string/difficulty_hard"
             android:layout_width="200dp"
             android:layout_height="30dp"/>
-        <RadioButton android:id="@+id/rbVeryHard" android:text="Очень сложный"
+        <RadioButton android:id="@+id/rbVeryHard" android:text="@string/difficulty_very_hard"
             android:layout_width="200dp"
             android:layout_height="30dp"/>
     </RadioGroup>
 
     <TextView
-        android:text="Размер поля"
+        android:text="@string/field_size"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"

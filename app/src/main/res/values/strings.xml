@@ -1,6 +1,28 @@
 <resources>
-    <string name="app_name">Kakuro</string>
+    <string name="app_name" translatable="false">Kakuro</string>
     <string name="navigation_drawer_open">Открыть меню</string>
     <string name="navigation_drawer_close">Закрыть меню</string>
     <string name="title_activity_leaderboard">LeaderboardActivity</string>
+    <string name="start_timer" translatable="false">00:00</string>
+    <string name="new_game">Новая игра</string>
+    <string name="start_game_button">Начать</string>
+    <string name="cancel_new_game">Отмена</string>
+    <string name="win_message">Поздравляем!</string>
+    <string name="win_time">Вы решили головоломку за %1$d минут %2$d секунд.</string>
+    <string name="ok_label">Ок</string>
+    <string name="timer_value" translatable="false">%02d:%02d</string>
+    <string name="login_label">Логин</string>
+    <string name="login_button">Войти</string>
+    <string name="choose_difficulty">Выберите сложность</string>
+    <string name="difficulty_easy">Легкий</string>
+    <string name="difficulty_medium">Средний</string>
+    <string name="difficulty_hard">Сложный</string>
+    <string name="difficulty_very_hard">Очень сложный</string>
+    <string name="field_size">Размер поля</string>
+    <string name="nav_new_game">Новая игра</string>
+    <string name="nav_how_to_play">Как играть</string>
+    <string name="nav_leaderboard">Список лидеров</string>
+    <string name="toast_login">Введите логин</string>
+    <string name="leaderboard">Таблица рекордов</string>
+    <string name="return_label">Назад</string>
 </resources>

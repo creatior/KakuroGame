@@ -25,7 +25,7 @@ object LevelLoader {
         val filtered = levels.filter { it.size == size }
 
         if (filtered.isEmpty()) {
-            throw IllegalArgumentException("Нет уровней сложности ${difficulty.name} и размера $size")
+            throw IllegalArgumentException("Error")
         }
 
         val level = filtered[levelIndex % filtered.size]

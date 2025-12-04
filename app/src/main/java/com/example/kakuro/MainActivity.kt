@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.gridlayout.widget.GridLayout
 import com.example.kakuro.Solver.isPuzzleSolved
 import com.google.android.material.navigation.NavigationView
+import com.example.kakuro.R
 
 class MainActivity : AppCompatActivity() {
     private var selectedCell: TextView? = null
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvTimer = findViewById(R.id.tvTimer)
-        tvTimer.text = "00:00"
+        tvTimer.text = getString(R.string.start_timer)
         tvTimer.visibility = View.GONE
 
         val startButton = findViewById<Button>(R.id.btnStartGame)
@@ -129,9 +130,9 @@ class MainActivity : AppCompatActivity() {
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sizes)
 
         AlertDialog.Builder(this)
-            .setTitle("Новая игра")
+            .setTitle(getString(R.string.new_game))
             .setView(dialogView)
-            .setPositiveButton("Начать") { dialog, _ ->
+            .setPositiveButton(getString(R.string.start_game_button)) { dialog, _ ->
                 val selectedSize = spinner.selectedItem.toString().substringBefore("x").toInt()
 
                 val selectedDifficulty = when (dialogView.findViewById<RadioGroup>(R.id.rgDifficulty).checkedRadioButtonId) {
@@ -155,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 startTimer()
                 dialog.dismiss()
             }
-            .setNegativeButton("Отмена", null)
+            .setNegativeButton(getString(R.string.cancel_new_game), null)
             .show()
     }
 
@@ -165,9 +166,9 @@ class MainActivity : AppCompatActivity() {
         val seconds = totalSeconds % 60
 
         AlertDialog.Builder(this)
-            .setTitle("Победа!")
-            .setMessage("Вы решили головоломку за %02d:%02d.".format(minutes, seconds))
-            .setPositiveButton("Ок", null)
+            .setTitle(getString(R.string.win_message))
+            .setMessage(getString(R.string.win_time,minutes, seconds))
+            .setPositiveButton(getString(R.string.ok_label), null)
             .show()
     }
 
@@ -205,9 +206,9 @@ class MainActivity : AppCompatActivity() {
                             textSize = 12f
                             gravity = android.view.Gravity.TOP or android.view.Gravity.END
                             text = buildString {
-                                cell.down?.let { append("↓$it") }
-                                if (cell.down != null && cell.right != null) append("\n")
                                 cell.right?.let { append("→$it") }
+                                if (cell.down != null && cell.right != null) append("\n")
+                                cell.down?.let { append("↓$it") }
                             }
                         }
                         addView(text)
@@ -247,8 +248,8 @@ class MainActivity : AppCompatActivity() {
                 val totalSeconds = (elapsedMillis / 1000).toInt()
                 val minutes = totalSeconds / 60
                 val seconds = totalSeconds % 60
-                tvTimer.text = String.format("%02d:%02d", minutes, seconds)
-                handler.postDelayed(this, 200) // 200ms для плавности, не обязательно 1000
+                tvTimer.text = getString(R.string.timer_value, minutes, seconds)
+                handler.postDelayed(this, 200)
             }
         }
         handler.post(timerRunnable)

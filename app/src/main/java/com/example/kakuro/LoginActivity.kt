@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Введите логин", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_login), Toast.LENGTH_SHORT).show()
             }
         }
     }
