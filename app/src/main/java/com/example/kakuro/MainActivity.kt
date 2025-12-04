@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.gridlayout.widget.GridLayout
+import com.example.kakuro.Solver.isPuzzleSolved
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var kakuroField: Array<Array<Cell>>
+    private var selectedModelCell: Cell? = null
 
     private lateinit var tvTimer: TextView
     private val handler = android.os.Handler()
@@ -106,8 +108,16 @@ class MainActivity : AppCompatActivity() {
 
         numberButtons.forEachIndexed { index, button ->
             button.setOnClickListener {
-                selectedCell?.text = (index + 1).toString()
+                val num = index + 1
+                selectedCell?.text = num.toString()
+                selectedModelCell?.value = num
+
+                if (isPuzzleSolved(kakuroField)) {
+                    stopTimer()
+                    showWinDialog()
+                }
             }
+
         }
     }
 
@@ -115,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_new_game, null)
         val spinner = dialogView.findViewById<Spinner>(R.id.spinnerSize)
 
-        val sizes = (10..20 step 5).map { "${it}x${it}" }
+        val sizes = listOf(9).map { "${it}x${it}" }
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sizes)
 
         AlertDialog.Builder(this)
@@ -146,6 +156,18 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setNegativeButton("Отмена", null)
+            .show()
+    }
+
+    private fun showWinDialog() {
+        val totalSeconds = getElapsedSeconds()
+        val minutes = totalSeconds / 60
+        val seconds = totalSeconds % 60
+
+        AlertDialog.Builder(this)
+            .setTitle("Победа!")
+            .setMessage("Вы решили головоломку за %02d:%02d.".format(minutes, seconds))
+            .setPositiveButton("Ок", null)
             .show()
     }
 
@@ -205,6 +227,7 @@ class MainActivity : AppCompatActivity() {
                             selectedCell?.background = null
                             text.setBackgroundResource(R.drawable.selected_cell_border)
                             selectedCell = text
+                            selectedModelCell = cell
                         }
                     }
                 }
@@ -231,6 +254,10 @@ class MainActivity : AppCompatActivity() {
         handler.post(timerRunnable)
     }
 
+    private fun getElapsedSeconds(): Int {
+        val elapsedMillis = SystemClock.elapsedRealtime() - startTime
+        return (elapsedMillis / 1000).toInt()
+    }
 
     private fun stopTimer() {
         handler.removeCallbacks(timerRunnable)
