@@ -1,3 +1,5 @@
+import java.io.Serializable
+
 enum class CellType { EMPTY, WHITE, BLACK }
 
 data class Cell(
@@ -6,4 +8,4 @@ data class Cell(
     val down: Int? = null,
     var color: Int? = 0,
     var value: Int? = 0,
-)
+) : Serializable
