@@ -25,4 +25,6 @@
     <string name="toast_login">Введите логин</string>
     <string name="leaderboard">Таблица рекордов</string>
     <string name="return_label">Назад</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="settings_language">Язык</string>
 </resources>

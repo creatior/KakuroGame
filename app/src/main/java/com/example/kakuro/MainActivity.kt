@@ -1,7 +1,9 @@
 package com.example.kakuro
 
 import Cell
+import LeaderBoardDbHelper
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -72,6 +74,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_leaderboard -> {
                     drawerLayout.closeDrawers()
                     startActivity(Intent(this, LeaderboardActivity::class.java))
+                    true
+                }
+                R.id.nav_settings -> {
+                    drawerLayout.closeDrawers()
+                    startActivity(Intent(this, SettingsActivity::class.java))
                     true
                 }
                 else -> false
@@ -165,6 +172,11 @@ class MainActivity : AppCompatActivity() {
         val minutes = totalSeconds / 60
         val seconds = totalSeconds % 60
 
+        val username = getUsername()
+
+        val dbHelper = LeaderBoardDbHelper(this)
+        dbHelper.insertWin(username, totalSeconds)
+
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.win_message))
             .setMessage(getString(R.string.win_time,minutes, seconds))
@@ -236,6 +248,11 @@ class MainActivity : AppCompatActivity() {
                 gridLayout.addView(cellView)
             }
         }
+    }
+
+    private fun getUsername(): String {
+        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        return prefs.getString("username", "unknown") ?: "unknown"
     }
 
     private fun startTimer() {

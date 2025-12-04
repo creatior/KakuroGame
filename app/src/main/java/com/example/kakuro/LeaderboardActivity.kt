@@ -1,6 +1,6 @@
 package com.example.kakuro
 
-import android.content.Intent
+import LeaderBoardDbHelper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import android.os.Bundle
@@ -11,9 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class LeaderboardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,13 +56,13 @@ data class Leader(val name: String, val time: String)
 
 @Composable
 fun LeaderboardScreen(modifier: Modifier = Modifier) {
-    val leaders = listOf(
-        Leader("User1", "01:25"),
-        Leader("User2", "01:40"),
-        Leader("User3", "02:00"),
-        Leader("User4", "02:10"),
-        Leader("User5", "02:30")
-    )
+    val context = LocalContext.current
+    var leaders by remember { mutableStateOf<List<Leader>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        val dbHelper = LeaderBoardDbHelper(context)
+        leaders = dbHelper.getTopLeaders()
+    }
 
     LazyColumn(
         modifier = modifier

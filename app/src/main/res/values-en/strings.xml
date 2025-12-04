@@ -22,4 +22,6 @@
     <string name="toast_login">Enter username</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="return_label">Return</string>
+    <string name="nav_settings">Settings</string>
+    <string name="settings_language">Language</string>
 </resources>
