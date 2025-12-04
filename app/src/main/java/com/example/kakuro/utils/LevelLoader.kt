@@ -1,7 +1,9 @@
-package com.example.kakuro
+package com.example.kakuro.utils
 
 import Cell
 import android.content.Context
+import com.example.kakuro.models.Difficulty
+import com.example.kakuro.models.LevelData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

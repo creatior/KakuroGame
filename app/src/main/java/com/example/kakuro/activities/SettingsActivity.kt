@@ -1,14 +1,12 @@
-package com.example.kakuro
+package com.example.kakuro.activities
 
-import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.kakuro.R
 import java.util.Locale
 
 class SettingsActivity : AppCompatActivity() {
@@ -24,14 +22,14 @@ class SettingsActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val savedLang = prefs.getString("app_language", "ru") ?: "ru"
 
         val selectedIndex = languages.indexOfFirst { it.second == savedLang }
         if (selectedIndex >= 0) spinner.setSelection(selectedIndex)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val langCode = languages[position].second
                 if (langCode != savedLang) {
                     setAppLocale(langCode)
@@ -49,7 +47,7 @@ class SettingsActivity : AppCompatActivity() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
 
-        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         prefs.edit().putString("app_language", language).apply()
 
         recreate()

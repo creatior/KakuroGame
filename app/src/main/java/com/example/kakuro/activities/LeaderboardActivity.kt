@@ -1,6 +1,6 @@
-package com.example.kakuro
+package com.example.kakuro.activities
 
-import LeaderBoardDbHelper
+import com.example.kakuro.db.LeaderBoardDbHelper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import android.os.Bundle
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.example.kakuro.R
 
 class LeaderboardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

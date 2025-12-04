@@ -1,4 +1,4 @@
-package com.example.kakuro
+package com.example.kakuro.models
 
 enum class Difficulty(val fileName: String) {
     EASY("levels_easy.json"),

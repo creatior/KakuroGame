@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kakuro">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LeaderboardActivity"
+            android:name=".activities.LeaderboardActivity"
             android:exported="false"
             android:label="@string/title_activity_leaderboard"
             android:theme="@style/Theme.Kakuro" />
         <activity
-            android:name=".HowToPlayActivity"
+            android:name=".activities.HowToPlayActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false" />
     </application>
 

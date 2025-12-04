@@ -1,4 +1,4 @@
-package com.example.kakuro
+package com.example.kakuro.utils
 
 import Cell
 

@@ -1,15 +1,13 @@
-package com.example.kakuro
+package com.example.kakuro.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.kakuro.activities.MainActivity
+import com.example.kakuro.R
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
             val login = etLogin.text.toString().trim()
             if (login.isNotEmpty()) {
                 // Сохраняем логин в SharedPreferences
-                val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
                 prefs.edit().putString("username", login).apply()
 
                 // Переходим в MainActivity

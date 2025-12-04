@@ -1,8 +1,10 @@
+package com.example.kakuro.db
+
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.kakuro.Leader
+import com.example.kakuro.activities.Leader
 
 class LeaderBoardDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 

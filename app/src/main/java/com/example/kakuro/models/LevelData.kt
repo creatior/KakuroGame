@@ -1,4 +1,4 @@
-package com.example.kakuro
+package com.example.kakuro.models
 
 data class LevelData(
     val size: Int,

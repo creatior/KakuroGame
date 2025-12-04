@@ -1,7 +1,6 @@
-package com.example.kakuro
+package com.example.kakuro.models
 
 import CellType
-
 
 data class CellData(
     val type: CellType,

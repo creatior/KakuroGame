@@ -1,26 +1,36 @@
-package com.example.kakuro
+package com.example.kakuro.activities
 
 import Cell
-import LeaderBoardDbHelper
+import com.example.kakuro.db.LeaderBoardDbHelper
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.RadioGroup
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.gridlayout.widget.GridLayout
-import com.example.kakuro.Solver.isPuzzleSolved
-import com.google.android.material.navigation.NavigationView
+import com.example.kakuro.utils.LevelLoader
 import com.example.kakuro.R
+import com.example.kakuro.utils.Solver
+import com.example.kakuro.models.Difficulty
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private var selectedCell: TextView? = null
@@ -30,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private var selectedModelCell: Cell? = null
 
     private lateinit var tvTimer: TextView
-    private val handler = android.os.Handler()
+    private val handler = Handler()
     private lateinit var timerRunnable: Runnable
     private var startTime: Long = 0
 
@@ -44,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -120,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 selectedCell?.text = num.toString()
                 selectedModelCell?.value = num
 
-                if (isPuzzleSolved(kakuroField)) {
+                if (Solver.isPuzzleSolved(kakuroField)) {
                     stopTimer()
                     showWinDialog()
                 }
@@ -216,7 +226,7 @@ class MainActivity : AppCompatActivity() {
                             )
                             setTextColor(Color.WHITE)
                             textSize = 12f
-                            gravity = android.view.Gravity.TOP or android.view.Gravity.END
+                            gravity = Gravity.TOP or Gravity.END
                             text = buildString {
                                 cell.right?.let { append("→$it") }
                                 if (cell.down != null && cell.right != null) append("\n")
@@ -230,7 +240,7 @@ class MainActivity : AppCompatActivity() {
                                 FrameLayout.LayoutParams.MATCH_PARENT,
                                 FrameLayout.LayoutParams.MATCH_PARENT
                             )
-                            gravity = android.view.Gravity.CENTER
+                            gravity = Gravity.CENTER
                             textSize = 20f
                             setTextColor(Color.BLACK)
                         }
@@ -251,7 +261,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUsername(): String {
-        val prefs = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
         return prefs.getString("username", "unknown") ?: "unknown"
     }
 
