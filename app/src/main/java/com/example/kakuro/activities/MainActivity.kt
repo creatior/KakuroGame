@@ -1,7 +1,6 @@
 package com.example.kakuro.activities
 
 import Cell
-import CellType
 import com.example.kakuro.db.LeaderBoardDbHelper
 import android.app.AlertDialog
 import android.content.Intent
@@ -22,14 +21,9 @@ import com.example.kakuro.R
 import com.example.kakuro.fragments.GameBoardFragment
 import com.example.kakuro.models.Difficulty
 import com.example.kakuro.utils.LevelLoader
-import com.example.kakuro.utils.Solver
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-
-    private var selectedCell: TextView? = null
-    private var selectedModelCell: Cell? = null
-
     private lateinit var kakuroField: Array<Array<Cell>>
 
     private lateinit var drawerLayout: DrawerLayout

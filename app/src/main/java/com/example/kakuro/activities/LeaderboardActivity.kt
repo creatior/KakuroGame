@@ -21,6 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.example.kakuro.R
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import androidx.compose.runtime.DisposableEffect
+import kotlin.math.sqrt
 
 class LeaderboardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,11 +64,52 @@ data class Leader(val name: String, val time: String)
 @Composable
 fun LeaderboardScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+
+    val dbHelper = remember { LeaderBoardDbHelper(context) }
     var leaders by remember { mutableStateOf<List<Leader>>(emptyList()) }
 
     LaunchedEffect(Unit) {
-        val dbHelper = LeaderBoardDbHelper(context)
         leaders = dbHelper.getTopLeaders()
+    }
+
+    val sensorManager = remember {
+        context.getSystemService(SensorManager::class.java)
+    }
+    val accelerometer = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
+
+    var lastAccel by remember { mutableStateOf(0f) }
+    var currentAccel by remember { mutableStateOf(0f) }
+    var shake by remember { mutableStateOf(0f) }
+
+    DisposableEffect(Unit) {
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent) {
+                val x = event.values[0]
+                val y = event.values[1]
+                val z = event.values[2]
+
+                lastAccel = currentAccel
+                currentAccel = sqrt((x * x + y * y + z * z))
+
+                val delta = currentAccel - lastAccel
+                shake = shake * 0.9f + delta
+
+                if (shake > 12f) {
+                    dbHelper.clearLeaders()
+                    leaders = emptyList()
+                }
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+        }
+
+        sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_UI)
+
+        onDispose {
+            sensorManager.unregisterListener(listener)
+        }
     }
 
     LazyColumn(
@@ -82,3 +129,4 @@ fun LeaderboardScreen(modifier: Modifier = Modifier) {
         }
     }
 }
+

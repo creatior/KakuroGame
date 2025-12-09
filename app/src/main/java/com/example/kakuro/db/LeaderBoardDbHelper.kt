@@ -73,4 +73,10 @@ class LeaderBoardDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         return leaders
     }
 
+    fun clearLeaders() {
+        val db = writableDatabase
+        db.delete(TABLE_NAME, null, null)
+        db.close()
+    }
+
 }
